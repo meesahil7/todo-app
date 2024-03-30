@@ -3,20 +3,19 @@
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-import { useCookies } from "react-cookie";
+import Cookies from "universal-cookie";
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
-  const [cookies, setCookie] = useCookies(["todoAuthToken"]);
   const router = useRouter();
-
+  const cookies = new Cookies(null, { path: "/" });
   const handleLogin = () => {
     const { email, password } = formData;
     if (!email && !password) return;
     axios
       .post("https://lime-dugong-sari.cyclic.app/user/login", formData)
       .then((res) => {
-        setCookie("todoAuthToken", res.data.token);
+        cookies.set("todoAuthToken", res.data.token);
         router.push("/todo");
       })
       .catch((err) => console.log(err));

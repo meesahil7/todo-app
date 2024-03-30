@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import isAuth from "../../components/Auth";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useCookies } from "react-cookie";
+import Cookies from "universal-cookie";
 
 const Page = () => {
   const [todos, setTodos] = useState([]);
@@ -12,11 +12,10 @@ const Page = () => {
   const [todoId, setTodoId] = useState("");
   const [openModal, setOpenModal] = useState(false);
   const [modalData, setModalData] = useState({});
-  const [cookies, setCookie, removeCookie] = useCookies(["todoAuthToken"]);
-
+  const cookies = new Cookies(null, { path: "/" });
   const router = useRouter();
 
-  const uesrToken = cookies.todoAuthToken; // token to verify the user is authenticated or not
+  const uesrToken = cookies.get("todoAuthToken"); // token to verify the user is authenticated or not
 
   const getAllTodos = () => {
     axios
@@ -75,7 +74,7 @@ const Page = () => {
   };
 
   const handleLogout = () => {
-    removeCookie("todoAuthToken");
+    cookies.remove("todoAuthToken");
     router.push("/");
   };
 
