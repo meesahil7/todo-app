@@ -3,8 +3,8 @@
 import React, { useEffect, useState } from "react";
 import isAuth from "../../components/Auth";
 import axios from "axios";
-import { eraseCookie, getCookie } from "@/helpers/login.helper";
 import { useRouter } from "next/navigation";
+import { useCookies } from "react-cookie";
 
 const Page = () => {
   const [todos, setTodos] = useState([]);
@@ -12,13 +12,13 @@ const Page = () => {
   const [todoId, setTodoId] = useState("");
   const [openModal, setOpenModal] = useState(false);
   const [modalData, setModalData] = useState({});
+  const [cookies, setCookie, removeCookie] = useCookies(["todoAuthToken"]);
 
   const router = useRouter();
 
-  const uesrToken = getCookie("todo-auth-token"); // token to verify the user is authenticated or not
+  const uesrToken = cookies.todoAuthToken; // token to verify the user is authenticated or not
 
   const getAllTodos = () => {
-    console.log("bug bug bug");
     axios
       .get("https://lime-dugong-sari.cyclic.app/todo/todos", {
         headers: { Authorization: uesrToken },
@@ -75,7 +75,7 @@ const Page = () => {
   };
 
   const handleLogout = () => {
-    eraseCookie("todo-auth-token");
+    removeCookie("todoAuthToken");
     router.push("/");
   };
 
@@ -84,7 +84,6 @@ const Page = () => {
     getAllTodos();
   }, []);
 
-  console.log(todos);
   return (
     <div className="container">
       <h1>Task Management App</h1>

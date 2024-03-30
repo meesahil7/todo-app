@@ -1,12 +1,13 @@
 "use client";
 
-import { setCookie } from "@/helpers/login.helper";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import { useCookies } from "react-cookie";
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
+  const [cookies, setCookie] = useCookies(["todoAuthToken"]);
   const router = useRouter();
 
   const handleLogin = () => {
@@ -15,7 +16,7 @@ const Login = () => {
     axios
       .post("https://lime-dugong-sari.cyclic.app/user/login", formData)
       .then((res) => {
-        setCookie("todo-auth-token", res.data.token, 365);
+        setCookie("todoAuthToken", res.data.token);
         router.push("/todo");
       })
       .catch((err) => console.log(err));
