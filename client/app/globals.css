@@ -1,0 +1,94 @@
+.loginContainer {
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.loginDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border: 1px solid black;
+  padding: 30px;
+}
+
+.loginDiv input {
+  width: 300px;
+  height: 30px;
+  padding-left: 20px;
+}
+
+.loginDiv button {
+  height: 30px;
+  cursor: pointer;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.todoTable {
+  border: 1px solid black;
+}
+
+.todoTable th {
+  border: 1px solid black;
+  padding: 10px;
+  width: 300px;
+}
+
+.todoTable td {
+  border: 1px solid black;
+  padding: 5px 10px;
+}
+
+.modal {
+  height: 300px;
+  width: 250px;
+  background-color: skyblue;
+  position: absolute;
+  top: 100;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.addTodo {
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.todos {
+  overflow: scroll;
+  height: 400px;
+  padding: 20px;
+  z-index: 0;
+}
+
+.modal input {
+  width: 80%;
+  height: 30px;
+}
+
+.modal select {
+  width: 80%;
+  height: 30px;
+}
+
+.modal button {
+  padding: 5px 10px;
+}
+
+.signup-btn {
+  padding: 10px;
+  cursor: pointer;
+}
